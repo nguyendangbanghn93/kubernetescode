@@ -17,13 +17,10 @@ node {
 
     stage('Push image') {
         app.inside {
-            sh 'echo "Start push" ${env.BUILD_NUMBER}'
+            sh "${env.BUILD_NUMBER}"
         }
         docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
             app.push("${env.BUILD_NUMBER}")
-        }
-        app.inside {
-            sh 'echo "End push"'
         }
     }
     
